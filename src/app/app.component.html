@@ -1,0 +1,25 @@
+<mat-toolbar color="accent" class="header-toolbar" fxLayout="row" fxLayoutAlign="space-between center">
+    <span class="agent-title">MyNest Agent Panel</span>
+    <div *ngIf="!isFullPage">
+        <div class="mn-announcements" fxLayout="row" fxLayoutAlign="center center" *ngIf="isGettingAnnouncements">
+            <img class="announcement-img" src="assets/images/megaphone.png" *ngIf="isGettingAnnouncements">
+            <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                <span *ngFor="let announcement of announcements" class="mr-5">&diams; {{announcement.message}}</span>
+            </marquee>
+        </div>
+    </div>
+    <div *ngIf="!isFullPage" class="header-actions">
+        <button mat-raised-button (click)="openChangePassword()">Change password</button>
+        <button mat-icon-button matTooltip="notifications" (click)="openNotifications()"><mat-icon [matBadge]="notificationCount">notifications</mat-icon></button>
+        <button mat-icon-button matTooltip="logout" (click)="logout()"><mat-icon>logout</mat-icon></button>
+    </div>
+</mat-toolbar>
+<div class="login-container">
+    <ng-container *ngTemplateOutlet="routerTemplate"></ng-container>
+</div>
+<ng-template #routerTemplate>
+    <router-outlet></router-outlet>
+</ng-template>
+<mat-toolbar class="footer-toolbar" *ngIf="!isFullPage">
+    <span>Copyrights © 2021. All Rights Reserved by MyNest.</span>
+</mat-toolbar>
